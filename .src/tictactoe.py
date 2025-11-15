@@ -87,4 +87,24 @@ class TicTacToe:
                 best_move = move
         return best_move
 
-TicTacToe()
+    def play_game(self):
+        '''Cria o loop de movimento para o jogo.'''
+        ai_turn = False
+
+        while not self._game_over():
+            if ai_turn:
+                self._make_move(self._get_best_move(), AI_PLAYER)
+
+            else:
+                pass
+
+            ai_turn = not ai_turn
+
+        winner = self._winner_check()
+        if winner == AI_PLAYER:
+            print('Vitória da IA.')
+        elif winner == HUMAN_PLAYER:
+            # EM TEORIA, IMPOSSÍVEL
+            print('Vitória do jogador.')
+        else:
+            print('Empate.')
