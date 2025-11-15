@@ -71,5 +71,20 @@ class TicTacToe:
                 self.board[move] == ''
                 best_score = min(score, best_score)
             return best_score
+    
+    def _get_best_move(self) -> int:
+        '''Retorna o melhor movimento possível para a IA usando o algoritmo Minimax.'''
+        best_score = float('-inf')
+        best_move = None
+
+        for move in self._avaliable_moves():
+            self._make_move(move, AI_PLAYER)
+            score = self._minimax(0, False)
+            self.board[move] = ''
+
+            if score > best_score:
+                best_score = score
+                best_move = move
+        return best_move
 
 TicTacToe()
