@@ -20,6 +20,7 @@ JOGO-DA-VELHA/
 ├── files/
 │   └── icon.png
 │
+├──.gitignore
 ├──readme.md
 └──requirements.txt
 ```
@@ -41,9 +42,9 @@ Resultado:
 
 ---
 
-## **🚀 Como Executar**
+## **🚀 Como Executar o código**
 
-1. Certifique-se de ter Python 3.13+ instalado.
+1. Certifique-se de ter Python 3.9+ instalado.
 2. Instale o PySide6:
 
 ```bash
@@ -66,14 +67,6 @@ python src/main.py
 * Nunca perde (apenas vence ou empata)
 * Detecção automática de fim de jogo
 * Reinício rápido do tabuleiro
-
----
-
-## **📌 Observações Técnicas**
-
-* O Minimax usado aqui não precisa de podas (α-β), já que o estado do jogo da velha é pequeno.
-* A IA sempre joga como **O**, o jogador como **X** (padrão, mas configurável em `values.py`).
-* Toda a lógica do jogo está desacoplada da interface (boa prática para testes).
 
 ---
 
