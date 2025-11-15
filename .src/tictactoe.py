@@ -6,6 +6,7 @@ from values import (HUMAN_PLAYER, AI_PLAYER)
 class TicTacToe:
     def __init__(self):
         self.board = ['' for _ in range(9)]
+        self.ai_turn = None
 
     def _avaliable_moves(self) -> list:
         '''Retorna quais espaços estão livres.'''
@@ -89,7 +90,7 @@ class TicTacToe:
 
     def play_game(self):
         '''Cria o loop de movimento para o jogo.'''
-        ai_turn = False
+        self.ai_turn = False
 
         while not self._game_over():
             if ai_turn:
