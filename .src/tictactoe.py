@@ -22,6 +22,7 @@ class TicTacToe:
             self.board[position] = player
             self.gui._updateButtons()
             self.ai_turn = not self.ai_turn
+            self.play_game()
             return True
         return False
     

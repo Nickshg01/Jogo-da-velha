@@ -1,4 +1,4 @@
-from PySide6.QtWidgets import (QMainWindow, QWidget, QGridLayout, QPushButton)
+from PySide6.QtWidgets import (QMainWindow, QWidget, QGridLayout, QPushButton, QMessageBox)
 from PySide6.QtGui import QIcon
 from values import (ICON, BUTTON_SIZE, BIG_FONT_SIZE, HUMAN_PLAYER)
 from tictactoe import TicTacToe
@@ -35,12 +35,11 @@ class MainWindow(QMainWindow):
                 self.setStyleSheet(f'color: red; font-size: {BIG_FONT_SIZE}px')
             elif text == 'O':
                 self.setStyleSheet(f'color: blue; font-size: {BIG_FONT_SIZE}px')
-            elif text == '':
+            elif text == '' and self.mainWindow.game._check_winner() is None:
                 self.clicked.connect(lambda: self._player_clicked())
 
         def _player_clicked(self):
             self.mainWindow.game._make_move(self.index, HUMAN_PLAYER)
-            self.mainWindow.game.play_game()
 
     def _updateButtons(self):
         '''Atualiza os botões do layout.'''
