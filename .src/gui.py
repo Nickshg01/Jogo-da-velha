@@ -9,7 +9,7 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
 
-        self.game = TicTacToe()
+        self.game = TicTacToe(self)
         self._layout = QGridLayout()
         self._buttons = []
 
@@ -40,7 +40,7 @@ class MainWindow(QMainWindow):
 
         def _player_clicked(self):
             self.mainWindow.game._make_move(self.index, HUMAN_PLAYER)
-            self.mainWindow._updateButtons()
+            self.mainWindow.game.play_game()
 
     def _updateButtons(self):
         '''Atualiza os botões do layout.'''

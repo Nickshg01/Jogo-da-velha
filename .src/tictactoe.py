@@ -3,9 +3,10 @@ from values import (HUMAN_PLAYER, AI_PLAYER)
 # LÓGICA BACKEND
 
 class TicTacToe:
-    def __init__(self):
+    def __init__(self, gui):
         self.board = ['' for _ in range(9)]
-        self.ai_turn = None
+        self.ai_turn = False
+        self.gui = gui
 
     def _available_moves(self) -> list:
         '''Retorna quais espaços estão livres.'''
@@ -19,6 +20,8 @@ class TicTacToe:
         '''Faz um movimento caso o espaço estiver vazio e retorna True. Caso contrário, retorna False.'''
         if self.board[position] == '':
             self.board[position] = player
+            self.gui._updateButtons()
+            self.ai_turn = not self.ai_turn
             return True
         return False
     
@@ -86,17 +89,11 @@ class TicTacToe:
         return best_move
 
     def play_game(self):
-        '''Cria o loop de movimento para o jogo.'''
-        self.ai_turn = False
-        
-        while not self._game_over():
+        '''Gerencia o movimento do jogo.'''        
+        if not self._game_over():
             if self.ai_turn:
                 self._make_move(self._get_best_move(), AI_PLAYER)
-
-            else:
-                raise NotImplementedError
-            
-            self.ai_turn = not self.ai_turn
+            return
 
         winner = self._check_winner()
         if winner == AI_PLAYER:
