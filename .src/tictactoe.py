@@ -7,13 +7,13 @@ class TicTacToe:
         self.board = ['' for _ in range(9)]
         self.ai_turn = None
 
-    def _available_moves(self) -> list:
+    def _avaliable_moves(self) -> list:
         '''Retorna quais espaços estão livres.'''
         return [i for i, spot in enumerate(self.board) if spot == '']
     
-    def _is_board_full(self) -> bool:
+    def _board_is_full(self) -> bool:
         '''Verifica se o tabuleiro está cheio.'''
-        return self._available_moves() == []
+        return self._avaliable_moves() == []
     
     def _make_move(self, position: int, player: str) -> bool:
         '''Faz um movimento caso o espaço estiver vazio e retorna True. Caso contrário, retorna False.'''
@@ -22,7 +22,7 @@ class TicTacToe:
             return True
         return False
     
-    def _check_winner(self) -> str | None:
+    def _winner_check(self) -> str | None:
         '''Verifica se há um vencedor no jogo. Retorna o vencedor ou None.'''
         # LINHAS
         for i in range(0, 9, 3):
@@ -39,23 +39,23 @@ class TicTacToe:
     
     def _game_over(self) -> bool:
         '''Verifica se o jogo encerrou.'''
-        return self._check_winner() is not None or self._is_board_full()
+        return self._winner_check() is not None or self._board_is_full()
     
     def _minimax(self, depth: int, is_maximizing: bool):
         '''Algoritmo Minimax. Retorna a melhor pontuação possível para o tabuleiro atual.'''
-        winner = self._check_winner()
+        winner = self._winner_check()
 
         if winner == AI_PLAYER:
             return 1
         elif winner == HUMAN_PLAYER:
             return -1
-        elif self._is_board_full():
+        elif self._board_is_full():
             return 0
         
         if is_maximizing:
             best_score = float('-inf')
             
-            for move in self._available_moves():
+            for move in self._avaliable_moves():
                 self.board[move] = AI_PLAYER
                 score = self._minimax(depth+1, False)
                 self.board[move] = ''
@@ -63,7 +63,7 @@ class TicTacToe:
             return best_score
         
         best_score = float('inf')
-        for move in self._available_moves():
+        for move in self._avaliable_moves():
             self.board[move] = HUMAN_PLAYER
             score = self._minimax(depth+1, True)
             self.board[move] = ''
@@ -75,7 +75,7 @@ class TicTacToe:
         best_score = float('-inf')
         best_move = None
 
-        for move in self._available_moves():
+        for move in self._avaliable_moves():
             self.board[move] = AI_PLAYER
             score = self._minimax(0, False)
             self.board[move] = ''
@@ -98,7 +98,7 @@ class TicTacToe:
             
             self.ai_turn = not self.ai_turn
 
-        winner = self._check_winner()
+        winner = self._winner_check()
         if winner == AI_PLAYER:
             print('Vitória da IA.')
         elif winner == HUMAN_PLAYER:
