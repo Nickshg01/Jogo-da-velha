@@ -42,9 +42,11 @@ Resultado:
 
 ---
 
-## **🚀 Como Executar o código**
+## **🚀 Como Executar**
 
-1. Certifique-se de ter Python 3.9+ instalado.
+### **📌 Executar pelo código**
+
+1. Certifique-se de ter Python 3.13+ instalado.
 2. Instale o PySide6:
 
 ```bash
@@ -56,6 +58,13 @@ pip install -r requirements.txt
 ```bash
 python src/main.py
 ```
+
+---
+
+### **📌 Usar a versão compilada (.exe)**
+
+* Baixe o arquivo .exe disponível na seção Releases do GitHub do projeto.
+* Execute o arquivo e o jogo abrirá normalmente, sem necessidade de Python instalado.
 
 ---
 
