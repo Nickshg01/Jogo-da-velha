@@ -98,9 +98,9 @@ class TicTacToe:
 
         winner = self._check_winner()
         if winner == AI_PLAYER:
-            print('Vitória da IA.')
+            self.gui._label.setText('Vitória da IA!')
         elif winner == HUMAN_PLAYER:
             # EM TEORIA, IMPOSSÍVEL
-            print('Vitória do jogador.')
+            self.gui._label.setText('Vitória do jogador!')
         else:
-            print('Empate.')
+            self.gui._label.setText('Empate!')

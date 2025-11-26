@@ -1,6 +1,7 @@
-from PySide6.QtWidgets import (QMainWindow, QWidget, QGridLayout, QPushButton, QMessageBox)
+from PySide6.QtWidgets import (QMainWindow, QWidget, QGridLayout, QPushButton, QVBoxLayout, QLabel)
+from PySide6.QtCore import Qt
 from PySide6.QtGui import QIcon
-from values import (ICON, BUTTON_SIZE, BIG_FONT_SIZE, HUMAN_PLAYER)
+from values import (ICON, BUTTON_SIZE, BIG_FONT_SIZE, HUMAN_PLAYER, MEDIUM_FONT_SIZE)
 from tictactoe import TicTacToe
 
 # CRIA A INTERFACE PRINCIPAL
@@ -8,9 +9,13 @@ from tictactoe import TicTacToe
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-
         self.game = TicTacToe(self)
-        self._layout = QGridLayout()
+        self._layout = QVBoxLayout()
+        self._gridLayout = QGridLayout()
+        self._label = self._Label('')
+
+        self._layout.addWidget(self._label)
+        self._layout.addLayout(self._gridLayout)
         self._buttons = []
 
         self.setCentralWidget(QWidget())
@@ -45,7 +50,16 @@ class MainWindow(QMainWindow):
 
         def _reset_board(self):
             self.mainWindow.game.board = ['' for _ in range(9)]
+            self.mainWindow._label.setText('')
             self.mainWindow._updateButtons()
+            self.mainWindow.game.ai_turn = False
+
+# PADRONIZA O LABEL
+    class _Label(QLabel):
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            self.setAlignment(Qt.AlignmentFlag(0x84))
+            self.setStyleSheet(f'font-size: {MEDIUM_FONT_SIZE}px')
 
     def _updateButtons(self):
         '''Atualiza os botões do layout.'''
@@ -56,5 +70,5 @@ class MainWindow(QMainWindow):
         c = 0
         for i in range(3):
             for j in range(3):
-                self._layout.addWidget(self._buttons[c], i, j)
+                self._gridLayout.addWidget(self._buttons[c], i, j)
                 c += 1
