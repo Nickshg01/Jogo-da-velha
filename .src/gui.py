@@ -37,9 +37,15 @@ class MainWindow(QMainWindow):
                 self.setStyleSheet(f'color: blue; font-size: {BIG_FONT_SIZE}px')
             elif text == '' and self.mainWindow.game._check_winner() is None:
                 self.clicked.connect(lambda: self._player_clicked())
+            if self.mainWindow.game._game_over():
+                self.clicked.connect(lambda: self._reset_board())
 
         def _player_clicked(self):
             self.mainWindow.game._make_move(self.index, HUMAN_PLAYER)
+
+        def _reset_board(self):
+            self.mainWindow.game.board = ['' for _ in range(9)]
+            self.mainWindow._updateButtons()
 
     def _updateButtons(self):
         '''Atualiza os botões do layout.'''
